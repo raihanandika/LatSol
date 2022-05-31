@@ -1,4 +1,6 @@
 import 'package:final_project_ujian_soal/view/login_page.dart';
+import 'package:final_project_ujian_soal/view/main_page.dart';
+import 'package:final_project_ujian_soal/view/register_page.dart';
 import 'package:final_project_ujian_soal/view/splash_scrren.dart';
 import 'package:flutter/material.dart';
 
@@ -18,8 +20,10 @@ class MyApp extends StatelessWidget {
       // home: const SplashScreen(),
       initialRoute: "/",
       routes: {
-        "/": (context) => SplashScreen(),
-        LoginPage.route: (context) => LoginPage()
+        "/": (context) => const SplashScreen(),
+        LoginPage.route: (context) => const LoginPage(),
+        RegisterPage.route: (context) => const RegisterPage(),
+        MainPage.route: (context) => const MainPage()
       },
     );
   }

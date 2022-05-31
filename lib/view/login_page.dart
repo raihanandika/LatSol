@@ -1,4 +1,5 @@
 import 'package:final_project_ujian_soal/constants/R.dart';
+import 'package:final_project_ujian_soal/view/register_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -38,6 +39,9 @@ class _LoginPageState extends State<LoginPage> {
                     color: R.colors.greySubtitle)),
             const Spacer(),
             ButtonLogin(
+              onTap: () {
+                Navigator.of(context).pushNamed(RegisterPage.route);
+              },
               backgroundColor: Colors.white,
               borderColor: R.colors.primary,
               child: Row(
@@ -54,6 +58,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             ButtonLogin(
+              onTap: () {
+                Navigator.of(context).pushNamed(RegisterPage.route);
+              },
               backgroundColor: Colors.black,
               borderColor: Colors.black,
               child: Row(
@@ -77,16 +84,18 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 class ButtonLogin extends StatelessWidget {
-  const ButtonLogin({
-    Key? key,
-    required this.backgroundColor,
-    required this.child,
-    required this.borderColor,
-  }) : super(key: key);
+  const ButtonLogin(
+      {Key? key,
+      required this.backgroundColor,
+      required this.child,
+      required this.borderColor,
+      required this.onTap})
+      : super(key: key);
 
   final Color backgroundColor;
   final Widget child;
   final Color borderColor;
+  final Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +109,7 @@ class ButtonLogin extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   side: BorderSide(color: borderColor),
                   borderRadius: BorderRadius.circular(25))),
-          onPressed: () {},
+          onPressed: onTap,
           child: child),
     );
   }
