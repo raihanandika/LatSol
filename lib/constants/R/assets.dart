@@ -5,4 +5,5 @@ class Assets {
   String icApple = "assets/auth/ic_apple.png";
   String imgHome = "assets/auth/ic_home.png";
   String imgProfile = "assets/auth/ic_profile.png";
+  String icDiscuss = "assets/auth/ic_discuss.png";
 }

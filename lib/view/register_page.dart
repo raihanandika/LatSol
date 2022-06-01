@@ -47,7 +47,8 @@ class _RegisterPageState extends State<RegisterPage> {
         padding: const EdgeInsets.only(bottom: 20),
         child: ButtonLogin(
           onTap: () {
-            Navigator.of(context).pushNamed(MainPage.route);
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil(MainPage.route, (context) => false);
           },
           backgroundColor: Colors.blue,
           borderColor: Colors.blue,
