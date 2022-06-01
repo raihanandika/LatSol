@@ -1,6 +1,7 @@
 import 'package:final_project_ujian_soal/constants/R.dart';
 import 'package:final_project_ujian_soal/view/register_page.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -14,9 +15,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: R.colors.grey,
+      backgroundColor: Color(0xFFF0F3F8),
       body: Padding(
-        padding: const EdgeInsets.all(32),
+        padding: const EdgeInsets.all(25),
         child: Column(
           children: [
             Align(
@@ -33,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
                     const TextStyle(fontSize: 22, fontWeight: FontWeight.w500)),
             Text(R.strings.loginDescription,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: GoogleFonts.poppins().copyWith(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: R.colors.greySubtitle)),
@@ -51,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(width: 15),
                   Text(R.strings.loginWithGoogle,
                       style: TextStyle(
-                          fontSize: 17,
+                          fontSize: 15,
                           fontWeight: FontWeight.w500,
                           color: R.colors.blackLogin)),
                 ],
@@ -70,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(width: 15),
                   Text(R.strings.loginWithApple,
                       style: const TextStyle(
-                          fontSize: 17,
+                          fontSize: 15,
                           fontWeight: FontWeight.w500,
                           color: Colors.white)),
                 ],
