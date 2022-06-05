@@ -1,6 +1,7 @@
 import 'package:final_project_ujian_soal/constants/r.dart';
 import 'package:final_project_ujian_soal/view/login_page.dart';
 import 'package:final_project_ujian_soal/view/main/latihan_soal/mapel_page.dart';
+import 'package:final_project_ujian_soal/view/main/latihan_soal/paket_soal.dart';
 import 'package:final_project_ujian_soal/view/main_page.dart';
 import 'package:final_project_ujian_soal/view/register_page.dart';
 import 'package:final_project_ujian_soal/view/splash_scrren.dart';
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
         LoginPage.route: (context) => const LoginPage(),
         RegisterPage.route: (context) => const RegisterPage(),
         MainPage.route: (context) => const MainPage(),
-        MapelPage.route: (context) => const MapelPage()
+        MapelPage.route: (context) => const MapelPage(),
+        PaketSoalPage.route: (context) => const PaketSoalPage(),
       },
     );
   }
