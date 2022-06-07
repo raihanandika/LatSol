@@ -82,7 +82,10 @@ class _MainPageState extends State<MainPage> {
                   padding: const EdgeInsets.only(top: 5),
                   child: Material(
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        // Navigator.of(context).pushNamed(ChatPage.route);
+                        print("Chat Page");
+                      },
                       child: Column(
                         children: [
                           Opacity(
@@ -112,7 +115,13 @@ class _MainPageState extends State<MainPage> {
                         setState(() {});
                       },
                       child: Column(
-                        children: const [Icon(Icons.person), Text("Profile")],
+                        children: [
+                          Image.asset(
+                            R.assets.icProfile,
+                            height: 20,
+                          ),
+                          Text("Profile")
+                        ],
                       ),
                     ),
                   ),

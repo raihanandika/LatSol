@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:final_project_ujian_soal/constants/R.dart';
 import 'package:final_project_ujian_soal/view/login_page.dart';
+import 'package:final_project_ujian_soal/view/main_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -13,7 +15,16 @@ class SplashScreen extends StatelessWidget {
     Timer(const Duration(seconds: 5), () {
       // Navigator.of(context)
       //     .push(MaterialPageRoute(builder: (_) => LoginPage()));
-      Navigator.of(context).pushReplacementNamed(LoginPage.route);
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        print("Login");
+        print(user);
+        Navigator.of(context).pushReplacementNamed(MainPage.route);
+      } else {
+        print("Not Login");
+        print(user);
+        Navigator.of(context).pushReplacementNamed(LoginPage.route);
+      }
     });
     return Scaffold(
       backgroundColor: R.colors.primary,

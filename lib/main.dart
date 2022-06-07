@@ -1,14 +1,24 @@
 import 'package:final_project_ujian_soal/constants/r.dart';
 import 'package:final_project_ujian_soal/view/login_page.dart';
+import 'package:final_project_ujian_soal/view/main/discussion/chat_page.dart';
 import 'package:final_project_ujian_soal/view/main/latihan_soal/mapel_page.dart';
 import 'package:final_project_ujian_soal/view/main/latihan_soal/paket_soal.dart';
 import 'package:final_project_ujian_soal/view/main_page.dart';
 import 'package:final_project_ujian_soal/view/register_page.dart';
 import 'package:final_project_ujian_soal/view/splash_scrren.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
+// void main() {
+//   runApp(const MyApp());
+// }
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      // options: DefaultFirebaseOptions.currentPlatform,
+      );
   runApp(const MyApp());
 }
 
@@ -31,6 +41,7 @@ class MyApp extends StatelessWidget {
         MainPage.route: (context) => const MainPage(),
         MapelPage.route: (context) => const MapelPage(),
         PaketSoalPage.route: (context) => const PaketSoalPage(),
+        ChatPage.route: (context) => const ChatPage()
       },
     );
   }
