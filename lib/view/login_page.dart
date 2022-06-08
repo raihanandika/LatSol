@@ -1,4 +1,8 @@
 import 'package:final_project_ujian_soal/constants/R.dart';
+import 'package:final_project_ujian_soal/constants/repository/auth_api.dart';
+import 'package:final_project_ujian_soal/models/user_by_email.dart';
+import 'package:final_project_ujian_soal/view/main/latihan_soal/home_page.dart';
+import 'package:final_project_ujian_soal/view/main_page.dart';
 import 'package:final_project_ujian_soal/view/register_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +70,15 @@ class _LoginPageState extends State<LoginPage> {
                 final user = FirebaseAuth.instance.currentUser;
                 if (user != null) {
                   // print(user);
-                  Navigator.of(context).pushNamed(RegisterPage.route);
+                  final dataUser = await AuthAPI().getUserByEmail(user.email);
+                  if (dataUser != null) {
+                    final data = UserByEmail.fromJson(dataUser);
+                    if (data.status == 1) {
+                      Navigator.of(context).pushNamed(MainPage.route);
+                    } else {
+                      Navigator.of(context).pushNamed(RegisterPage.route);
+                    }
+                  }
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text("Gagal Masuk"),

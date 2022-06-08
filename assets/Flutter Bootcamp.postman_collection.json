@@ -1,0 +1,856 @@
+{
+	"info": {
+		"_postman_id": "0e5b8053-e0d0-4c87-a051-af0e7f76fcc1",
+		"name": "Flutter Bootcamp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "get user by email",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "18be70c0-4e4d-44ff-a475-50c51ece99a0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "helloaltop@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/users?email=alitopan@widyaedu.com",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "alitopan@widyaedu.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrasi User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "18be70c0-4e4d-44ff-a475-50c51ece99a0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_lengkap",
+									"value": "nama",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "testerngbady8w87u@gmail.coms",
+									"type": "text"
+								},
+								{
+									"key": "nama_sekolah",
+									"value": "d",
+									"type": "text"
+								},
+								{
+									"key": "kelas",
+									"value": "d",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "d",
+									"type": "text"
+								},
+								{
+									"key": "foto",
+									"value": "url foto",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/users/registrasi",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"registrasi"
+							]
+						},
+						"description": "JENJANG (enum)\r\nSD,SMP,SMA,SMK JENJANG (enum)\r\nSD,SMP,SMA,SMK (WAJIB KAPITAL)"
+					},
+					"response": []
+				},
+				{
+					"name": "Update User by email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "18be70c0-4e4d-44ff-a475-50c51ece99a0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama_lengkap",
+									"value": "nama000",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "testerngbayu@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "nama_sekolah",
+									"value": "d00",
+									"type": "text"
+								},
+								{
+									"key": "kelas",
+									"value": "d00",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "d00",
+									"type": "text"
+								},
+								{
+									"key": "foto",
+									"value": "url foto",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/users/update",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"update"
+							]
+						},
+						"description": "JENJANG (enum)\r\nSD,SMP,SMA,SMK (WAJIB KAPITAL)"
+					},
+					"response": []
+				},
+				{
+					"name": "get list user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "18be70c0-4e4d-44ff-a475-50c51ece99a0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{URL}}/users/all/?search=test",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"all",
+								""
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "test"
+								}
+							]
+						},
+						"description": "add search by email user"
+					},
+					"response": []
+				},
+				{
+					"name": "get user by apple id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "18be70c0-4e4d-44ff-a475-50c51ece99a0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "testerngbayu@gmail.com",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/users/appleid/?apple_id=alitopan@widyaedu.com",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"appleid",
+								""
+							],
+							"query": [
+								{
+									"key": "apple_id",
+									"value": "alitopan@widyaedu.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get status user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "18be70c0-4e4d-44ff-a475-50c51ece99a0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{URL}}/users/status_service?user_email=helloaltop@gmail.com",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"status_service"
+							],
+							"query": [
+								{
+									"key": "user_email",
+									"value": "helloaltop@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update delete",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "18be70c0-4e4d-44ff-a475-50c51ece99a0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_email",
+									"value": "testerngbayu@gmail.com",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/users/update_delete",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"users",
+								"update_delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Banner",
+			"item": [
+				{
+					"name": "get list event",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"value": "18be70c0-4e4d-44ff-a475-50c51ece99a3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.widyaedu.com/event/list?limit=",
+							"protocol": "https",
+							"host": [
+								"api",
+								"widyaedu",
+								"com"
+							],
+							"path": [
+								"event",
+								"list"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": ""
+								}
+							]
+						},
+						"description": "dapat di limit result nya dengan param limit (int)"
+					},
+					"response": []
+				},
+				{
+					"name": "get list artikel",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "18be70c0-4e4d-44ff-a475-50c51ece99a0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "https://api.widyaedu.com/artikel/list/?limit=",
+							"protocol": "https",
+							"host": [
+								"api",
+								"widyaedu",
+								"com"
+							],
+							"path": [
+								"artikel",
+								"list",
+								""
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get list artikel wp",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://widyaedu.com/blog/wp-json/wp/v2/posts?per_page=5",
+							"protocol": "https",
+							"host": [
+								"widyaedu",
+								"com"
+							],
+							"path": [
+								"blog",
+								"wp-json",
+								"wp",
+								"v2",
+								"posts"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Latihan soal",
+			"item": [
+				{
+					"name": "Data mata pelajaran",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "18be70c0-4e4d-44ff-a475-50c51ece99a0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{URL}}/exercise/data_course?major_name=IPS&user_email=alitopan@widyaedu.com",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"exercise",
+								"data_course"
+							],
+							"query": [
+								{
+									"key": "major_name",
+									"value": "IPS",
+									"description": "{IPA,IPS}"
+								},
+								{
+									"key": "user_email",
+									"value": "alitopan@widyaedu.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Data paket latsol by sub_course_content_id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "18be70c0-4e4d-44ff-a475-50c51ece99a0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{URL}}/exercise/data_exercise?course_id=132&user_email=alitopan@widyaedu.com",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"exercise",
+								"data_exercise"
+							],
+							"query": [
+								{
+									"key": "course_id",
+									"value": "132"
+								},
+								{
+									"key": "user_email",
+									"value": "alitopan@widyaedu.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Data detail paket latsol by exercise_id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "18be70c0-4e4d-44ff-a475-50c51ece99a0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{URL}}/exercise/exercise_detail?exercise_id=9&user_email=alitopan@widyaedu.com",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"exercise",
+								"exercise_detail"
+							],
+							"query": [
+								{
+									"key": "exercise_id",
+									"value": "9"
+								},
+								{
+									"key": "user_email",
+									"value": "alitopan@widyaedu.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Kerjakan/Kerjakan ulang latihan soal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "18be70c0-4e4d-44ff-a475-50c51ece99a0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "exercise_id",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "user_email",
+									"value": "testerngbayu@gmail.com",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/exercise/kerjakan",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"exercise",
+								"kerjakan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Input jawaban soal",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "18be70c0-4e4d-44ff-a475-50c51ece99a0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_email",
+									"value": "testerngbayu@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "exercise_id",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "bank_question_id[]",
+									"value": "2",
+									"description": "as array",
+									"type": "text"
+								},
+								{
+									"key": "student_answer[]",
+									"value": "D",
+									"description": "wajib kapital",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/exercise/input_jawaban",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"exercise",
+								"input_jawaban"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Data Skor akhir by exercise_id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "18be70c0-4e4d-44ff-a475-50c51ece99a0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{URL}}/exercise/score_result?exercise_id=9&user_email=helloaltop@gmail.com",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"exercise",
+								"score_result"
+							],
+							"query": [
+								{
+									"key": "exercise_id",
+									"value": "9"
+								},
+								{
+									"key": "user_email",
+									"value": "helloaltop@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Data Pembahasan by exercise_id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "18be70c0-4e4d-44ff-a475-50c51ece99a0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{URL}}/exercise/pembahasan?exercise_id=5&user_email=testerngbayu@gmail.com",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"exercise",
+								"pembahasan"
+							],
+							"query": [
+								{
+									"key": "exercise_id",
+									"value": "5"
+								},
+								{
+									"key": "user_email",
+									"value": "testerngbayu@gmail.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Leaderboard",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "18be70c0-4e4d-44ff-a475-50c51ece99a0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{URL}}/exercise/leaderboard?exercise_id=9&user_email=alitopan@widyaedu.com",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"exercise",
+								"leaderboard"
+							],
+							"query": [
+								{
+									"key": "exercise_id",
+									"value": "9"
+								},
+								{
+									"key": "user_email",
+									"value": "alitopan@widyaedu.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Done Test",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-api-key",
+								"type": "text",
+								"value": "18be70c0-4e4d-44ff-a475-50c51ece99a0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_email",
+									"value": "testerngbayu@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "exercise_id",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/exercise/donetest",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"exercise",
+								"donetest"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
