@@ -159,10 +159,18 @@ class _HomePageState extends State<HomePage> {
                   itemCount: list.data!.length > 3 ? 3 : list.data!.length,
                   itemBuilder: (BuildContext context, int index) {
                     final currentMapel = list.data![index];
-                    return MapelWidget(
-                      title: currentMapel.courseName!,
-                      totalDone: currentMapel.jumlahDone!,
-                      totalPacket: currentMapel.jumlahMateri!,
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (BuildContext context) {
+                          return PaketSoalPage(id: currentMapel.courseId!);
+                        }));
+                      },
+                      child: MapelWidget(
+                        title: currentMapel.courseName!,
+                        totalDone: currentMapel.jumlahDone!,
+                        totalPacket: currentMapel.jumlahMateri!,
+                      ),
                     );
                   }),
           // MapelWidget(),
@@ -250,68 +258,62 @@ class MapelWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context).pushNamed(PaketSoalPage.route);
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(10)),
-        margin: const EdgeInsets.only(bottom: 10),
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 21),
-        child: Row(
-          children: [
-            Container(
-              height: 53,
-              width: 53,
-              padding: const EdgeInsets.all(13),
-              decoration: BoxDecoration(
-                  color: R.colors.grey,
-                  borderRadius: BorderRadius.circular(10)),
-              child: Image.asset(R.assets.icAtom),
+    return Container(
+      decoration: BoxDecoration(
+          color: Colors.white, borderRadius: BorderRadius.circular(10)),
+      margin: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 21),
+      child: Row(
+        children: [
+          Container(
+            height: 53,
+            width: 53,
+            padding: const EdgeInsets.all(13),
+            decoration: BoxDecoration(
+                color: R.colors.grey, borderRadius: BorderRadius.circular(10)),
+            child: Image.asset(R.assets.icAtom),
+          ),
+          const SizedBox(
+            width: 6,
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                ),
+                Text(
+                  "$totalDone/$totalPacket Paket latihan soal",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12,
+                      color: R.colors.greySubtitleHome),
+                ),
+                const SizedBox(height: 5),
+                Stack(
+                  children: [
+                    Container(
+                      height: 10,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: R.colors.grey,
+                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                    Container(
+                      height: 10,
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      decoration: BoxDecoration(
+                          color: R.colors.primary,
+                          borderRadius: BorderRadius.circular(10)),
+                    )
+                  ],
+                )
+              ],
             ),
-            const SizedBox(
-              width: 6,
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-                  ),
-                  Text(
-                    "$totalDone/$totalPacket Paket latihan soal",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12,
-                        color: R.colors.greySubtitleHome),
-                  ),
-                  const SizedBox(height: 5),
-                  Stack(
-                    children: [
-                      Container(
-                        height: 10,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                            color: R.colors.grey,
-                            borderRadius: BorderRadius.circular(10)),
-                      ),
-                      Container(
-                        height: 10,
-                        width: MediaQuery.of(context).size.width * 0.4,
-                        decoration: BoxDecoration(
-                            color: R.colors.primary,
-                            borderRadius: BorderRadius.circular(10)),
-                      )
-                    ],
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

@@ -1,15 +1,38 @@
 import 'package:final_project_ujian_soal/constants/r.dart';
+import 'package:final_project_ujian_soal/models/network_response.dart';
+import 'package:final_project_ujian_soal/models/paket_soal_list.dart';
+import 'package:final_project_ujian_soal/repository/latihan_soal_api.dart';
 import 'package:flutter/material.dart';
 
 class PaketSoalPage extends StatefulWidget {
-  const PaketSoalPage({Key? key}) : super(key: key);
+  const PaketSoalPage({Key? key, required this.id}) : super(key: key);
   static String route = "paket_soal_page";
+  final String id;
 
   @override
   State<PaketSoalPage> createState() => _PaketSoalPageState();
 }
 
 class _PaketSoalPageState extends State<PaketSoalPage> {
+  PaketSoalList? paketSoalList;
+
+  getPaketSoal() async {
+    final paketSoalResults = await LatihanSoalAPI().getPaketSoal(widget.id);
+    if (paketSoalResults.status == Status.success) {
+      // print("Mapel result");
+      // print(paketSoalResults.data);
+      paketSoalList = PaketSoalList.fromJson(paketSoalResults.data!);
+      setState(() {});
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getPaketSoal();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,17 +50,24 @@ class _PaketSoalPageState extends State<PaketSoalPage> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
             ),
             Expanded(
-              child: GridView.count(
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                crossAxisCount: 2,
-                childAspectRatio: 3 / 2,
-                children: const [
-                  PaketSoalWidget(),
-                  PaketSoalWidget(),
-                  PaketSoalWidget()
-                ],
-              ),
+              child: paketSoalList == null
+                  ? Center(child: CircularProgressIndicator())
+                  : GridView.count(
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                      crossAxisCount: 2,
+                      childAspectRatio: 7 / 6,
+                      children:
+                          List.generate(paketSoalList!.data!.length, (index) {
+                        final currentPaketSoal = paketSoalList!.data![index];
+                        return PaketSoalWidget(data: currentPaketSoal);
+                      }).toList()
+                      // [
+                      //   PaketSoalWidget(),
+                      //   PaketSoalWidget(),
+                      //   PaketSoalWidget()
+                      // ],
+                      ),
             ),
           ],
         ),
@@ -47,9 +77,8 @@ class _PaketSoalPageState extends State<PaketSoalPage> {
 }
 
 class PaketSoalWidget extends StatelessWidget {
-  const PaketSoalWidget({
-    Key? key,
-  }) : super(key: key);
+  const PaketSoalWidget({Key? key, required this.data}) : super(key: key);
+  final PaketSoalData data;
 
   @override
   Widget build(BuildContext context) {
@@ -74,11 +103,11 @@ class PaketSoalWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 4),
-          const Text(
-            "Aljabar",
+          Text(
+            data.exerciseTitle!,
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          Text("0/0 Paket Soal",
+          Text("${data.jumlahDone}/${data.jumlahSoal} Paket Soal",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 9,
