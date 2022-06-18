@@ -85,7 +85,7 @@ class _RegisterPageState extends State<RegisterPage> {
               "foto": UserEmail.getUserPhotoUrl()
             };
             print(json);
-            final result = await AuthAPI().postRegister(json);
+            final result = await AuthAPI().postRegister(json); 
             if (result.status == Status.success) {
               final registerResult = UserByEmail.fromJson(result.data!);
               if (registerResult.status == 1) {
