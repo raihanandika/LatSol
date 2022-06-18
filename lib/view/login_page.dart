@@ -1,6 +1,8 @@
 import 'package:final_project_ujian_soal/constants/R.dart';
-import 'package:final_project_ujian_soal/constants/repository/auth_api.dart';
+import 'package:final_project_ujian_soal/helpers/user_email.dart';
+import 'package:final_project_ujian_soal/models/network_response.dart';
 import 'package:final_project_ujian_soal/models/user_by_email.dart';
+import 'package:final_project_ujian_soal/repository/auth_api.dart';
 import 'package:final_project_ujian_soal/view/main/latihan_soal/home_page.dart';
 import 'package:final_project_ujian_soal/view/main_page.dart';
 import 'package:final_project_ujian_soal/view/register_page.dart';
@@ -67,18 +69,25 @@ class _LoginPageState extends State<LoginPage> {
               onTap: () async {
                 // Navigator.of(context).pushNamed(RegisterPage.route);
                 await signInWithGoogle();
-                final user = FirebaseAuth.instance.currentUser;
+                final user = UserEmail.getUserEmail();
                 if (user != null) {
+                  // print("Login Login Screen");
                   // print(user);
-                  final dataUser = await AuthAPI().getUserByEmail(user.email);
-                  if (dataUser != null) {
-                    final data = UserByEmail.fromJson(dataUser);
+                  final dataUser = await AuthAPI().getUserByEmail();
+                  if (dataUser.status == Status.success) {
+                    // print("Login Login Screen");
+                    // print(dataUser);
+                    final data = UserByEmail.fromJson(dataUser.data!);
                     if (data.status == 1) {
+                      // print("Login Login Screen");
+                      // print(data);
+                      // print(data.status);
                       Navigator.of(context).pushNamed(MainPage.route);
                     } else {
                       Navigator.of(context).pushNamed(RegisterPage.route);
                     }
                   }
+                  Navigator.of(context).pushNamed(MainPage.route);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text("Gagal Masuk"),

@@ -1,4 +1,8 @@
 import 'package:final_project_ujian_soal/constants/r.dart';
+import 'package:final_project_ujian_soal/helpers/user_email.dart';
+import 'package:final_project_ujian_soal/models/network_response.dart';
+import 'package:final_project_ujian_soal/models/user_by_email.dart';
+import 'package:final_project_ujian_soal/repository/auth_api.dart';
 import 'package:final_project_ujian_soal/view/login_page.dart';
 import 'package:final_project_ujian_soal/view/main_page.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +18,13 @@ class RegisterPage extends StatefulWidget {
 enum Gender { lakiLaki, perempuan }
 
 class _RegisterPageState extends State<RegisterPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController schoolNameController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
+
+  List<String> classS = ["X", "XI", "XII"];
+  String selectedClass = "X";
+
   String gender = "Laki-laki";
 
   onTapGender(Gender genderInput) {
@@ -25,9 +36,18 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() {});
   }
 
-  List<String> classS = ["X", "XI", "XII"];
-  String selectedClass = "X";
-  TextEditingController emailController = TextEditingController();
+  initDatUser() {
+    emailController.text = UserEmail.getUserEmail()!;
+    fullNameController.text = UserEmail.getUserDisplayName()!;
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    initDatUser();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +74,29 @@ class _RegisterPageState extends State<RegisterPage> {
           child: Padding(
         padding: const EdgeInsets.only(bottom: 20),
         child: ButtonLogin(
-          onTap: () {
-            Navigator.of(context)
-                .pushNamedAndRemoveUntil(MainPage.route, (context) => false);
+          onTap: () async {
+            final json = {
+              "email": emailController.text,
+              "nama_lengkap": fullNameController.text,
+              "nama_sekolah": schoolNameController.text,
+              "kelas": selectedClass,
+              "gender": gender,
+              "foto": UserEmail.getUserPhotoUrl()
+            };
+            print(json);
+            final result = await AuthAPI().postRegister(json);
+            if (result.status == Status.success) {
+              final registerResult = UserByEmail.fromJson(result.data!);
+              if (registerResult.status == 1) {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    MainPage.route, (context) => false);
+              } else {
+                SnackBar(content: Text(registerResult.message!));
+              }
+            } else {
+              SnackBar(
+                  content: Text("Terjadi kesalahan, silahkan ulangi kembali"));
+            }
           },
           backgroundColor: Colors.blue,
           borderColor: Colors.blue,
@@ -75,14 +115,15 @@ class _RegisterPageState extends State<RegisterPage> {
             children: [
               RegisterTextField(
                 controller: emailController,
-                title: "Nama Lengkap",
-                hintText: "Nama Lengkap",
+                title: "Email Anda",
+                hintText: "Email",
+                enable: false,
               ),
               const SizedBox(height: 15),
               RegisterTextField(
-                controller: emailController,
-                title: "Email Anda",
-                hintText: "Email",
+                controller: fullNameController,
+                title: "Nama Lengkap Anda",
+                hintText: "Nama Lengkap",
               ),
               const SizedBox(height: 15),
               const Text(
@@ -172,7 +213,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               const SizedBox(height: 15),
               RegisterTextField(
-                controller: emailController,
+                controller: schoolNameController,
                 title: "Nama Sekolah",
                 hintText: "Nama Sekolah",
               ),
@@ -202,10 +243,12 @@ class RegisterTextField extends StatelessWidget {
       {Key? key,
       required this.title,
       required this.hintText,
-      required this.controller})
+      required this.controller,
+      this.enable = true})
       : super(key: key);
   final String title;
   final String hintText;
+  final bool enable;
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -224,6 +267,7 @@ class RegisterTextField extends StatelessWidget {
               color: Colors.white,
               border: Border.all(color: R.colors.greyBorder)),
           child: TextField(
+            enabled: enable,
             controller: controller,
             decoration: InputDecoration(
                 border: InputBorder.none,
