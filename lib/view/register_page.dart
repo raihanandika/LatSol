@@ -1,4 +1,5 @@
 import 'package:final_project_ujian_soal/constants/r.dart';
+import 'package:final_project_ujian_soal/helpers/preference_helper.dart';
 import 'package:final_project_ujian_soal/helpers/user_email.dart';
 import 'package:final_project_ujian_soal/models/network_response.dart';
 import 'package:final_project_ujian_soal/models/user_by_email.dart';
@@ -88,6 +89,7 @@ class _RegisterPageState extends State<RegisterPage> {
             if (result.status == Status.success) {
               final registerResult = UserByEmail.fromJson(result.data!);
               if (registerResult.status == 1) {
+                await PreferenceHelper().setUserData(registerResult.data!);
                 Navigator.of(context).pushNamedAndRemoveUntil(
                     MainPage.route, (context) => false);
               } else {

@@ -1,4 +1,5 @@
 import 'package:final_project_ujian_soal/constants/R.dart';
+import 'package:final_project_ujian_soal/helpers/preference_helper.dart';
 import 'package:final_project_ujian_soal/helpers/user_email.dart';
 import 'package:final_project_ujian_soal/models/network_response.dart';
 import 'package:final_project_ujian_soal/models/user_by_email.dart';
@@ -82,6 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                       // print("Login Login Screen");
                       // print(data);
                       // print(data.status);
+                      await PreferenceHelper().setUserData(data.data!);
                       Navigator.of(context).pushNamed(MainPage.route);
                     } else {
                       Navigator.of(context).pushNamed(RegisterPage.route);
