@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         MainPage.route: (context) => const MainPage(),
         // MapelPage.route: (context) => const MapelPage(),
         // PaketSoalPage.route: (context) => const PaketSoalPage(),
-        ChatPage.route: (context) => const ChatPage()
+        // ChatPage.route: (context) => ChatPage()
       },
     );
   }

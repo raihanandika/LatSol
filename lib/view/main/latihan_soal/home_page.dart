@@ -245,16 +245,20 @@ class _HomePageState extends State<HomePage> {
 }
 
 class MapelWidget extends StatelessWidget {
-  const MapelWidget(
-      {Key? key,
-      required this.title,
-      required this.totalDone,
-      required this.totalPacket})
-      : super(key: key);
+  const MapelWidget({
+    Key? key,
+    required this.title,
+    required this.totalDone,
+    required this.totalPacket,
+    // required this.jumlahSoal,
+    // required this.jumlahDone,
+  }) : super(key: key);
 
   final String title;
   final int? totalDone;
   final int? totalPacket;
+  // final int? jumlahSoal;
+  // final int? jumlahDone;
 
   @override
   Widget build(BuildContext context) {
@@ -296,6 +300,7 @@ class MapelWidget extends StatelessWidget {
                   children: [
                     Container(
                       height: 10,
+                      // width: double.infinity,
                       width: double.infinity,
                       decoration: BoxDecoration(
                           color: R.colors.grey,

@@ -2,6 +2,7 @@ import 'package:final_project_ujian_soal/constants/r.dart';
 import 'package:final_project_ujian_soal/models/network_response.dart';
 import 'package:final_project_ujian_soal/models/paket_soal_list.dart';
 import 'package:final_project_ujian_soal/repository/latihan_soal_api.dart';
+import 'package:final_project_ujian_soal/view/main/latihan_soal/kerjakan_latihan_soal.dart';
 import 'package:flutter/material.dart';
 
 class PaketSoalPage extends StatefulWidget {
@@ -82,37 +83,45 @@ class PaketSoalWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white,
-      ),
-      // margin: const EdgeInsets.all(13.0),
-      padding: const EdgeInsets.all(13.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.blue.withOpacity(0.2)),
-            padding: const EdgeInsets.all(12),
-            child: Image.asset(
-              R.assets.icNote,
-              width: 20,
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (BuildContext context) {
+          return KerjakanLatihanSoalPage(id: data.exerciseId!);
+        }));
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+        ),
+        // margin: const EdgeInsets.all(13.0),
+        padding: const EdgeInsets.all(13.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.blue.withOpacity(0.2)),
+              padding: const EdgeInsets.all(12),
+              child: Image.asset(
+                R.assets.icNote,
+                width: 20,
+              ),
             ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            data.exerciseTitle!,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-          Text("${data.jumlahDone}/${data.jumlahSoal} Paket Soal",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 9,
-                  color: R.colors.greySubtitleHome))
-        ],
+            const SizedBox(height: 4),
+            Text(
+              data.exerciseTitle!,
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Text("${data.jumlahDone}/${data.jumlahSoal} Paket Soal",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 9,
+                    color: R.colors.greySubtitleHome))
+          ],
+        ),
       ),
     );
   }
