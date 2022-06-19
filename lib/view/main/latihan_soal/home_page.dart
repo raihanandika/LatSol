@@ -5,6 +5,7 @@ import 'package:final_project_ujian_soal/models/network_response.dart';
 import 'package:final_project_ujian_soal/repository/latihan_soal_api.dart';
 import 'package:final_project_ujian_soal/view/main/latihan_soal/mapel_page.dart';
 import 'package:final_project_ujian_soal/view/main/latihan_soal/paket_soal.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -38,12 +39,55 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  setupFCM() async {
+    // Get any messages which caused the application to open from
+    // a terminated state.
+    final tokenFcm = await FirebaseMessaging.instance.getToken();
+    print("tokenfcm: $tokenFcm");
+    RemoteMessage? initialMessage =
+        await FirebaseMessaging.instance.getInitialMessage();
+
+    // // If the message also contains a data property with a "type" of "chat",
+    // // navigate to a chat screen
+    // if (initialMessage != null) {
+    //   _handleMessage(initialMessage);
+    // }
+
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+
+    print('User granted permission: ${settings.authorizationStatus}');
+
+    // // Also handle any interaction when the app is in the background via a
+    // // Stream listener
+    // FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+    FirebaseMessaging.onMessageOpenedApp.listen((event) {});
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('Got a message whilst in the foreground!');
+      print('Message data: ${message.data}');
+
+      if (message.notification != null) {
+        print('Message also contained a notification: ${message.notification}');
+      }
+    });
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getMapel();
     getBanner();
+    setupFCM();
   }
 
   @override
